@@ -67,3 +67,11 @@ This project transforms a traditional personal website into an interactive exper
    - If the API response contains certain keywords, additional text and images are dynamically revealed on the client side.
    - All updates occur in real-time, providing a seamless user experience.
 
+## Contact
+
+Feel free to reach out if you have any questions or suggestions:
+
+- 📧 **Email:** [tsao.che@northeastern.edu](mailto:tsao.che@northeastern.edu)  
+- 🔗 **LinkedIn:** [Cheyun Tsao](https://www.linkedin.com/in/che-yun-tsao)  
+- 🌐 **My Website:** 
+
