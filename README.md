@@ -72,6 +72,6 @@ This project transforms a traditional personal website into an interactive exper
 Feel free to reach out if you have any questions or suggestions:
 
 - 📧 **Email:** [tsao.che@northeastern.edu](mailto:tsao.che@northeastern.edu)  
-- 🔗 **LinkedIn:** [Cheyun Tsao](https://www.linkedin.com/in/che-yun-tsao)  
-- 🌐 **My Website:** 
+- 🔗 **LinkedIn:** [Cheyun Tsao](https://www.linkedin.com/in/cheyun-tsao)  
+- 🌐 **My Website:** https://flowise-95qe.onrender.com/chatbot/a54514cd-ef68-4ab9-8cd0-601b3934f747
 
