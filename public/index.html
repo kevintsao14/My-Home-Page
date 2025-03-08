@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -24,4 +24,129 @@
         <p class="text-center p-4 bg-slate-700 w-full rounded-xl" id="response">Chatbot's response goes here..</p>
     </section>
   </body>
-</html>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grok-Style Minimal Interface Demo</title>
+  <script src="app.js" defer></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9; /* Light off-white background */
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    
+    /* Greeting text at the top */
+    .greeting {
+      font-size: 28px;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+    
+    /* Subtext prompt below the greeting */
+    .sub-prompt {
+      font-size: 16px;
+      color: #555;
+      margin-bottom: 30px;
+    }
+    
+    /* Container for the input + button (applied to the form) */
+    form.input-container {
+      display: flex;
+      align-items: center;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 25px;
+      padding: 10px 20px;
+      width: 90%;
+      max-width: 600px;
+    }
+    
+    /* Text input styling */
+    .input-container input {
+      flex: 1;
+      border: none;
+      outline: none;
+      font-size: 16px;
+      margin-right: 10px;
+    }
+    
+    /* Button styling */
+    .input-container button {
+      border: none;
+      background-color: #007BFF; 
+      color: #fff;
+      font-size: 16px;
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+    
+    /* A simple row of icons or actions if you want them */
+    .actions-row {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    
+    .actions-row button {
+      background: none;
+      border: none;
+      font-size: 14px;
+      color: #666;
+      cursor: pointer;
+      padding: 6px;
+      border-radius: 6px;
+      transition: background-color 0.2s;
+    }
+    
+    .actions-row button:hover {
+      background-color: #e8e8e8;
+    }
+    
+    /* Response container styling */
+    #response {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 10px 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background-color: #fff;
+      width: 90%;
+      max-width: 600px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="response">Chatbot's response goes here..</div>
+
+  <div class="greeting">Hi there! I am bot_Kevin</div>
+  <div class="sub-prompt">Ask me questions to complete my home page!</div>
+
+  <form class="input-container">
+    <input type="text" id="message" placeholder="Learn more about me!">
+    <button type="submit" id="message-btn">Send</button>
+  </form>
+
+</body>
+</html> 

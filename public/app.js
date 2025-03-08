@@ -20,9 +20,9 @@ form.addEventListener("submit", async (e) => {
       body: JSON.stringify({ message: messageInput.value }),
     });
 
-    const data = await res.json();
+    const data = await res.text();
 
-    responseEl.innerHTML = data.message;
+    responseEl.innerHTML = data;
   } catch (error) {
     responseEl.innerHTML = error.message;
   } finally {
