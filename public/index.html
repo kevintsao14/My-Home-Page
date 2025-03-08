@@ -32,7 +32,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Grok-Style Minimal Interface Demo</title>
+  <title>Kevin's Home</title>
   <script src="app.js" defer></script>
   <style>
     * {
@@ -43,7 +43,7 @@
     
     body {
       font-family: Arial, sans-serif;
-      background-color: #f9f9f9; /* Light off-white background */
+      background-color: #FEF6E5; /* Background color */
       color: #333;
       display: flex;
       flex-direction: column;
@@ -134,6 +134,24 @@
       max-width: 600px;
       text-align: center;
     }
+    
+    /* Starter prompts styling */
+    .starter-prompts {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    .starter-prompts button {
+      background-color: #ECE6E0;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 15px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .starter-prompts button:hover {
+      background-color: #F0E2D0;
+    }
   </style>
 </head>
 
@@ -147,6 +165,17 @@
     <input type="text" id="message" placeholder="Learn more about me!">
     <button type="submit" id="message-btn">Send</button>
   </form>
+  <div class="starter-prompts">
+    <button onclick="fillInput('What is your name?')">What is your name?</button>
+    <button onclick="fillInput('Tell me about your projects')">Tell me about your projects</button>
+    <button onclick="fillInput('What are your hobbies?')">What are your hobbies?</button>
+  </div>
+
+  <script>
+    function fillInput(text) {
+      document.getElementById('message').value = text;
+    }
+  </script>
 
 </body>
 </html> 
