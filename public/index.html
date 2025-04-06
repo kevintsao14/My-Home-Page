@@ -26,8 +26,8 @@
   </body>
 </html> -->
 
-
-<!DOCTYPE html>
+<!-- Current -->
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -123,6 +123,8 @@
     /* Response container styling */
     #response {
       position: absolute;
+      height: 400px;         /*Fixed height for scrolling */
+      overflow-y: auto;      /* Enable vertical scrolling */
       top: 20px;
       left: 50%;
       transform: translateX(-50%);
@@ -132,7 +134,50 @@
       background-color: #fff;
       width: 90%;
       max-width: 600px;
-      text-align: center;
+
+      display: flex;
+      flex-direction: column;
+      text-align: right;
+    }
+
+    .message {
+      margin-bottom: 10px;
+      padding: 8px;
+      border-radius: 5px;
+      max-width: 80%;
+      word-wrap: break-word;
+      display: inline-block;
+      white-space: normal;
+    }
+    .user-message {
+      background-color: #d1e7dd;
+      align-self: flex-end;
+      text-align: left;
+      display: inline-flex;
+    }
+    .bot-message {
+      background-color: #f8d7da;
+      align-self: flex-start;
+      text-align: left;
+    }
+
+    /* For message label and content */
+    .message-label {
+        font-weight: bold;
+        margin: 0 5px;
+    }
+    
+    .bot-message .message-label {
+        order: 0;
+    }
+    
+    .user-message .message-label {
+        order: 1;
+    }
+    
+    .message-content {
+        display: inline-block;
+        max-width: 70%;
     }
     
     /* Starter prompts styling */
@@ -178,4 +223,759 @@
   </script>
 
 </body>
-</html> 
+</html>  -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kevin's Interactive Profile</title>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <!-- Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Confetti (for easter eggs) -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <style>
+    /* ===== BASE STYLES ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #FEF6E5;
+      color: #333;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    
+    h1, h2, h3 {
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    /* ===== LAYOUT ===== */
+    .container {
+      display: flex;
+      min-height: 100vh;
+    }
+    
+    /* Sidebar */
+    .profile-sidebar {
+      width: 380px;
+      background-color: #fff;
+      padding: 2rem;
+      box-shadow: 2px 0 15px rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 10;
+    }
+    
+    /* Main Content */
+    .main-content {
+      flex: 1;
+      padding: 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    /* ===== PROFILE SIDEBAR ===== */
+    .profile-pic {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid #F0E2D0;
+      margin-bottom: 1.5rem;
+      transition: transform 0.3s;
+    }
+    
+    .profile-pic:hover {
+      transform: rotate(5deg) scale(1.05);
+    }
+    
+    .profile-name {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+      color: #3D405B;
+    }
+    
+    .profile-title {
+      color: #E07A5F;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+    }
+    
+    .profile-bio {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #6C757D;
+    }
+    
+    .profile-stats {
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+      margin-bottom: 2rem;
+      padding: 1rem 0;
+      border-top: 1px solid #eee;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .stat {
+      text-align: center;
+      padding: 0 0.5rem;
+    }
+    
+    .stat-value {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #3D405B;
+    }
+    
+    .stat-label {
+      font-size: 0.8rem;
+      color: #888;
+      margin-top: 0.3rem;
+    }
+    
+    .profile-links {
+      width: 100%;
+    }
+    
+    .profile-link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 0;
+      border-top: 1px solid #eee;
+      color: #333;
+      text-decoration: none;
+      transition: color 0.3s, transform 0.3s;
+    }
+    
+    .profile-link:last-child {
+      border-bottom: 1px solid #eee;
+    }
+    
+    .profile-link:hover {
+      color: #E07A5F;
+      transform: translateX(5px);
+    }
+    
+    /* ===== MAIN CONTENT ===== */
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      margin-bottom: 1rem;
+      animation: fadeIn 1s ease-out;
+    }
+    
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    /* .name-glow {
+      color: #3D405B;
+      text-shadow: 0 0 10px rgba(61, 64, 91, 0.2);
+      animation: glow-pulse 2s infinite alternate;
+    } */
+    
+    .subtitle {
+      color: #6C757D;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .subtitle::after {
+      content: "";
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 30px;
+      height: 2px;
+      background: #E07A5F;
+      animation: bounce 2s infinite;
+    }
+    
+    /* Chat Container */
+    .chat-container {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+      position: relative;
+      padding: 2rem;
+      width: 85%;
+      max-width: 850px;
+      margin-bottom: 2rem;
+    }
+    
+    /* Messages */
+    #response {
+      height: 300px;
+      overflow-y: auto;
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      border: 1px solid #eee;
+      border-radius: 10px;
+      background-color: #f9f9f9;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+    
+    .message {
+      padding: 0.8rem 1.2rem;
+      border-radius: 18px;
+      max-width: 80%;
+      word-wrap: break-word;
+      animation: fadeInUp 0.3s ease-out;
+    }
+    
+    .user-message {
+      background-color: #3D405B;
+      color: white;
+      align-self: flex-end;
+      border-bottom-right-radius: 5px;
+    }
+    
+    .bot-message {
+      background-color: #f0f0f0;
+      align-self: flex-start;
+      border-bottom-left-radius: 5px;
+    }
+    
+    /* Message label and content */
+    .message-label {
+      font-weight: bold;
+      margin: 0 5px;
+    }
+    
+    .bot-message .message-label {
+      order: 0;
+    }
+    
+    .user-message .message-label {
+      order: 1;
+    }
+    
+    .message-content {
+      display: inline-block;
+    }
+    
+    /* Input Area */
+    .input-container {
+      display: flex;
+      align-items: center;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 25px;
+      padding: 0.8rem 1.2rem;
+      width: 100%;
+      transition: box-shadow 0.3s;
+    }
+    
+    .input-container:focus-within {
+      box-shadow: 0 0 0 3px rgba(61, 64, 91, 0.1);
+    }
+    
+    .input-container input {
+      flex: 1;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+      margin-right: 0.5rem;
+      background: transparent;
+    }
+    
+    .input-container button {
+      border: none;
+      background-color: #3D405B;
+      color: #fff;
+      font-size: 1rem;
+      padding: 0.5rem 1.2rem;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+    
+    .input-container button:hover {
+      background-color: #2D304B;
+      transform: scale(1.05);
+    }
+    
+    /* Starter Prompts */
+    .starter-prompts {
+      display: flex;
+      gap: 0.8rem;
+      margin-top: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    .starter-prompts button {
+      background-color: #ECE6E0;
+      border: none;
+      padding: 0.6rem 1rem;
+      border-radius: 15px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.3s;
+    }
+    
+    .starter-prompts button:hover {
+      background-color: #E07A5F;
+      color: white;
+      transform: translateY(-2px);
+    }
+    
+    /* Hidden Sections */
+    .hidden-section {
+      opacity: 0;
+      max-height: 0;
+      overflow: hidden;
+      width: 100%;
+      max-width: 850px;
+      margin-top: 1rem;
+      transition: opacity 0.5s, max-height 0.8s ease-out, margin 0.5s;
+    }
+    
+    .hidden-section.reveal {
+      opacity: 1;
+      max-height: 1000px;
+      margin-top: 2rem;
+    }
+    
+    /* Projects Section */
+    .projects-section {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+    }
+    
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #3D405B;
+      margin-bottom: 1.5rem;
+    }
+    
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .project-card {
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      border: 1px solid #eee;
+      transition: all 0.3s;
+    }
+    
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+      border-color: #E07A5F;
+    }
+    
+    .project-title {
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      color: #3D405B;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .project-description {
+      font-size: 0.9rem;
+      color: #6C757D;
+    }
+    
+    /* Hobbies Section */
+    .hobbies-section {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+      border-left: 4px solid #E07A5F;
+    }
+    
+    /* Easter Egg Mode */
+    body.party-mode {
+      background: linear-gradient(135deg, #FEF6E5 0%, #E7F2F8 100%);
+      animation: bg-pulse 10s infinite alternate;
+    }
+    
+    .confetti-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1000;
+    }
+    
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes glow-pulse {
+      0% { text-shadow: 0 0 10px rgba(61, 64, 91, 0.2); }
+      100% { text-shadow: 0 0 15px rgba(61, 64, 91, 0.4); }
+    }
+    
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-5px); }
+    }
+    
+    @keyframes bg-pulse {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+    
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+      
+      .profile-sidebar {
+        width: 100%;
+        padding: 1.5rem;
+      }
+      
+      .main-content {
+        padding: 1.5rem;
+      }
+      
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Confetti Canvas (hidden by default) -->
+  <canvas id="confetti-canvas" class="confetti-canvas"></canvas>
+  
+  <div class="container">
+    <!-- Profile Sidebar -->
+    <aside class="profile-sidebar">
+      <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Kevin" class="profile-pic">
+      <h1 class="profile-name">Kevin Chen</h1>
+      <div class="profile-title">Software Developer & AI Enthusiast</div>
+      <p class="profile-bio">Building intelligent systems and beautiful interfaces. Passionate about machine learning, web development, and open source projects.</p>
+      
+      <div class="profile-stats">
+        <div class="stat">
+          <div class="stat-value">42</div>
+          <div class="stat-label">Projects</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">3.8k</div>
+          <div class="stat-label">Followers</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">127</div>
+          <div class="stat-label">Following</div>
+        </div>
+      </div>
+      
+      <div class="profile-links">
+        <a href="#" class="profile-link">
+          <i data-lucide="folder-git-2"></i>
+          <span>Projects</span>
+        </a>
+        <a href="#" class="profile-link">
+          <i data-lucide="briefcase"></i>
+          <span>Experience</span>
+        </a>
+        <a href="#" class="profile-link">
+          <i data-lucide="graduation-cap"></i>
+          <span>Education</span>
+        </a>
+        <a href="#" class="profile-link">
+          <i data-lucide="code-2"></i>
+          <span>Skills</span>
+        </a>
+        <a href="#" class="profile-link">
+          <i data-lucide="mail"></i>
+          <span>Contact</span>
+        </a>
+      </div>
+    </aside>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Hero Section -->
+      <div class="hero">
+        <h1>Hi! I'm <span class="name-glow">Kevin</span></h1>
+        <p class="subtitle">Ask me anything to uncover my world ↓</p>
+      </div>
+      
+      <!-- Chat Container -->
+      <div class="chat-container">
+        <div id="response">
+          <div class="message bot-message">
+            <span class="message-label">Kevin:</span>
+            <span class="message-content">Hello! I'm Kevin, a software developer specializing in AI applications. You can ask me about my projects, experience, or hobbies. What would you like to know?</span>
+          </div>
+        </div>
+        
+        <form class="input-container" id="chat-form">
+          <input type="text" id="message-input" placeholder="Ask me something..." autocomplete="off">
+          <button type="submit" id="send-btn">
+            <i data-lucide="send"></i>
+          </button>
+        </form>
+        
+        <div class="starter-prompts">
+          <button onclick="fillInput('What is your name?')">
+            <i data-lucide="user"></i> What is your name?
+          </button>
+          <button onclick="fillInput('Tell me about your projects')">
+            <i data-lucide="folder-git-2"></i> My Projects
+          </button>
+          <button onclick="fillInput('What are your hobbies?')">
+            <i data-lucide="gamepad-2"></i> Hobbies
+          </button>
+        </div>
+      </div>
+      
+      <!-- Hidden Sections (Revealed by Keywords) -->
+      <!-- Projects Section -->
+      <div class="hidden-section projects-section">
+        <h3 class="section-title">
+          <i data-lucide="folder-git-2"></i>
+          <span>Featured Projects</span>
+        </h3>
+        <div class="projects-grid">
+          <div class="project-card">
+            <h4 class="project-title">
+              <i data-lucide="cpu"></i>
+              AI Chatbot Framework
+            </h4>
+            <p class="project-description">Open-source framework for building conversational AI with natural language processing.</p>
+          </div>
+          <div class="project-card">
+            <h4 class="project-title">
+              <i data-lucide="image"></i>
+              Portfolio Generator
+            </h4>
+            <p class="project-description">Automated tool that creates beautiful developer portfolios from GitHub data.</p>
+          </div>
+          <div class="project-card">
+            <h4 class="project-title">
+              <i data-lucide="cloud"></i>
+              Image Recognition API
+            </h4>
+            <p class="project-description">Cloud service that classifies images with 95% accuracy using deep learning.</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Hobbies Section -->
+      <div class="hidden-section hobbies-section">
+        <h3 class="section-title">
+          <i data-lucide="gamepad-2"></i>
+          <span>My Hobbies</span>
+        </h3>
+        <div class="projects-grid">
+          <div class="project-card">
+            <h4 class="project-title">
+              <i data-lucide="camera"></i>
+              Photography
+            </h4>
+            <p class="project-description">Street and landscape photography. I love capturing urban life and nature.</p>
+          </div>
+          <div class="project-card">
+            <h4 class="project-title">
+              <i data-lucide="dumbbell"></i>
+              Fitness
+            </h4>
+            <p class="project-description">Regular gym-goer and runner. Completed 3 half-marathons this year!</p>
+          </div>
+          <div class="project-card">
+            <h4 class="project-title">
+              <i data-lucide="music"></i>
+              Piano
+            </h4>
+            <p class="project-description">Classically trained pianist. Currently learning jazz improvisation.</p>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+  
+// Initialize Lucide icons
+lucide.createIcons();
+
+// Fill input with starter prompt
+function fillInput(text) {
+  const input = document.getElementById('message-input');
+  input.value = text;
+  input.focus();
+}
+
+// Handle form submission
+document.getElementById('chat-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  
+  const messageInput = document.getElementById('message-input');
+  const responseEl = document.getElementById('response');
+  const sendBtn = document.getElementById('send-btn');
+  
+  const userMessage = messageInput.value.trim();
+  if (!userMessage) return;
+
+  // Create the user's message element
+  addMessage(userMessage, 'user');
+
+  // Process keywords to reveal sections
+  processKeywords(userMessage);
+
+  // Disable button and show loading state
+  sendBtn.disabled = true;
+  const originalBtnHTML = sendBtn.innerHTML;
+  sendBtn.innerHTML = '<i data-lucide="loader"></i>';
+  lucide.createIcons();
+
+  try {
+    // Call the Flowise API through your backend
+    const res = await fetch("/api/flowise", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ message: userMessage }),
+    });
+
+    const data = await res.text();
+
+    // Add bot response to chat
+    addMessage(data, 'bot');
+    
+    // Scroll the chat container to the bottom
+    responseEl.scrollTop = responseEl.scrollHeight;
+  } catch (error) {
+    // Handle errors
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'message bot-message';
+    
+    const labelSpan = document.createElement('span');
+    labelSpan.className = 'message-label';
+    labelSpan.textContent = 'Kevin:';
+    
+    const contentSpan = document.createElement('span');
+    contentSpan.className = 'message-content';
+    contentSpan.textContent = `Sorry, there was an error: ${error.message}`;
+    
+    errorDiv.appendChild(labelSpan);
+    errorDiv.appendChild(contentSpan);
+    
+    responseEl.appendChild(errorDiv);
+    responseEl.scrollTop = responseEl.scrollHeight;
+  } finally {
+    // Reset button state
+    sendBtn.disabled = false;
+    sendBtn.innerHTML = originalBtnHTML;
+    lucide.createIcons();
+    
+    // Clear input
+    messageInput.value = '';
+  }
+});
+
+// Add message to chat
+function addMessage(text, sender) {
+  const responseDiv = document.getElementById('response');
+  const messageDiv = document.createElement('div');
+  messageDiv.className = `message ${sender}-message`;
+  
+  // Create message content with label
+  const labelSpan = document.createElement('span');
+  labelSpan.className = 'message-label';
+  labelSpan.textContent = sender === 'user' ? 'You:' : 'Kevin:';
+  
+  const contentSpan = document.createElement('span');
+  contentSpan.className = 'message-content';
+  
+  // If the bot message includes HTML (like <br> tags from backend), use innerHTML
+  if (sender === 'bot') {
+    contentSpan.innerHTML = text;
+  } else {
+    contentSpan.textContent = text;
+  }
+  
+  messageDiv.appendChild(labelSpan);
+  messageDiv.appendChild(contentSpan);
+  
+  responseDiv.appendChild(messageDiv);
+  responseDiv.scrollTop = responseDiv.scrollHeight;
+}
+
+// Process keywords and reveal sections
+function processKeywords(message) {
+  const lowerMsg = message.toLowerCase();
+  
+  // Check for project-related keywords
+  if (lowerMsg.includes('project') || lowerMsg.includes('work') || lowerMsg.includes('portfolio')) {
+    document.querySelector('.projects-section').classList.add('reveal');
+  }
+  
+  // Check for hobby-related keywords
+  if (lowerMsg.includes('hobby') || lowerMsg.includes('hobbies') || lowerMsg.includes('interest') || 
+      lowerMsg.includes('free time') || lowerMsg.includes('fun')) {
+    document.querySelector('.hobbies-section').classList.add('reveal');
+  }
+  
+  // Easter egg
+  if (lowerMsg.includes('easter egg') || lowerMsg.includes('secret') || lowerMsg.includes('surprise me')) {
+    triggerConfetti();
+  }
+}
+
+// Easter egg: Trigger confetti
+function triggerConfetti() {
+  document.body.classList.add('party-mode');
+  confetti({
+    particleCount: 100,
+    spread: 70,
+    origin: { y: 0.6 }
+  });
+  
+  setTimeout(() => {
+    document.body.classList.remove('party-mode');
+  }, 3000);
+}
+  </script>
+</body>
+</html>
