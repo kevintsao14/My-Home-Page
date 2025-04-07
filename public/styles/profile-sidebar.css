@@ -293,3 +293,59 @@
       -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
     }
   }
+  
+  /* Updated Profile Sidebar Styles for Desktop */
+
+/* Make the sidebar sticky on desktop view */
+@media (min-width: 769px) {
+    .profile-sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
+    
+    /* Ensure scrollable area takes up appropriate space */
+    .profile-scrollable {
+      max-height: calc(100vh - 350px); /* Adjust based on your profile-top height */
+      overflow-y: auto;
+    }
+    
+    /* Add some padding at the bottom for better scrolling experience */
+    .profile-scrollable {
+      padding-bottom: 2rem;
+    }
+    
+    /* Improve scrollbar styling for the sidebar */
+    .profile-sidebar::-webkit-scrollbar {
+      width: 5px;
+    }
+    
+    .profile-sidebar::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 10px;
+    }
+    
+    .profile-sidebar::-webkit-scrollbar-thumb {
+      background: #ccc;
+      border-radius: 10px;
+    }
+    
+    .profile-sidebar::-webkit-scrollbar-thumb:hover {
+      background: var(--primary);
+    }
+  }
+  
+  /* Keep the mobile behavior the same */
+  @media (max-width: 768px) {
+    .profile-sidebar {
+      position: fixed;
+      top: 0;
+      left: -100%;
+      width: 80%;
+      height: 100vh;
+      z-index: 99;
+      transition: left 0.3s ease;
+      overflow: hidden;
+    }
+  }

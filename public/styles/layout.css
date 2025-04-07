@@ -6,7 +6,7 @@
 
 /* Sidebar */
 .profile-sidebar {
-    width: 380px;
+    width: 360px;
     background-color: var(--bg-white);
     padding: 2rem;
     box-shadow: 2px 0 15px var(--shadow-light);
@@ -71,3 +71,18 @@
         padding: 1.5rem;
     }
 }
+
+
+/* Updated container layout for better desktop experience */
+@media (min-width: 769px) {
+    .container {
+      display: flex;
+      min-height: 100vh;
+      align-items: flex-start; /* This prevents stretching content */
+    }
+    
+    .main-content {
+      min-height: 100vh;
+      overflow-y: auto;
+    }
+  }
