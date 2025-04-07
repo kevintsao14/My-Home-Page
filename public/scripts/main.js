@@ -245,19 +245,19 @@ function processKeywords(message) {
 }
 
 
-// // Easter egg: Trigger confetti
-// function triggerConfetti() {
-//     document.body.classList.add('party-mode');
-//     confetti({
-//         particleCount: 100,
-//         spread: 70,
-//         origin: { y: 0.6 }
-//     });
+// Easter egg: Trigger confetti
+function triggerConfetti() {
+    document.body.classList.add('party-mode');
+    confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 }
+    });
 
-//     setTimeout(() => {
-//         document.body.classList.remove('party-mode');
-//     }, 3000);
-// }
+    setTimeout(() => {
+        document.body.classList.remove('party-mode');
+    }, 3000);
+}
 
 function showUnlockNotification(text) {
     const unlockMessage = document.createElement('div');
