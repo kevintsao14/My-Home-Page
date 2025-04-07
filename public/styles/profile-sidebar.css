@@ -237,3 +237,59 @@
 .email {
     background-color: var(--accent);
 }
+
+/* Split the sidebar into fixed and scrollable parts */
+.profile-sidebar {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Full height */
+    max-height: 100%; /* Fallback for some browsers */
+    overflow: hidden; /* Prevent entire sidebar from scrolling */
+  }
+  
+  /* Fixed profile section at the top */
+  .profile-top {
+    flex-shrink: 0; /* Don't allow this section to shrink */
+    padding-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Scrollable section for links and content */
+  .profile-scrollable {
+    flex: 1;
+    overflow-y: auto; /* Enable scrolling for this section */
+    padding-right: 5px; /* Add some padding to prevent content touching the scrollbar */
+  }
+  
+  /* Custom scrollbar styling */
+  .profile-scrollable::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  .profile-scrollable::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+  
+  .profile-scrollable::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 10px;
+  }
+  
+  .profile-scrollable::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+  }
+  
+  /* Mobile specific adjustments */
+  @media (max-width: 768px) {
+    .profile-sidebar {
+      padding-top: 3rem; /* Make room for the close button */
+    }
+    
+    /* Ensure the scrolling works on mobile too */
+    .profile-scrollable {
+      -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    }
+  }

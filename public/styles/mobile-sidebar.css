@@ -1,0 +1,113 @@
+/* Mobile Sidebar Styles */
+.hamburger-menu {
+    display: none;
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 100;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  }
+  
+  /* Media query for mobile devices */
+  @media (max-width: 768px) {
+    /* Show hamburger menu on mobile */
+    .hamburger-menu {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    /* Container layout changes */
+    .container {
+      flex-direction: column;
+    }
+    
+    /* Hide sidebar by default on mobile */
+    .profile-sidebar {
+      position: fixed;
+      top: 0;
+      left: -100%; /* Off-screen */
+      width: 80%;
+      height: 100vh;
+      max-height: 100vh;
+      z-index: 99;
+      transition: left 0.3s ease;
+      background-color: var(--bg-white);
+      overflow: hidden; /* Prevent entire sidebar from scrolling */
+      padding: 1.5rem;
+    }
+    
+    /* Show sidebar when open class is added */
+    .profile-sidebar.open {
+      left: 0;
+      box-shadow: 2px 0 15px var(--shadow-light);
+    }
+    
+    /* Overlay when sidebar is open */
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 98;
+    }
+    
+    .sidebar-overlay.active {
+      display: block;
+    }
+    
+    /* Make sidebar content more compact on mobile */
+    .profile-top {
+      padding-bottom: 0.5rem;
+    }
+    
+    .profile-pic-container {
+      width: 150px;
+      height: 150px;
+      margin-bottom: 1rem;
+    }
+    
+    .profile-name {
+      font-size: 1.5rem;
+    }
+    
+    .profile-bio {
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+    
+    /* Prevent body from scrolling when sidebar is open */
+    body.sidebar-open {
+      overflow: hidden;
+    }
+    
+    /* Adjust main content to take full width */
+    .main-content {
+      width: 100%;
+      padding-top: 4rem; /* Add padding for the hamburger menu */
+    }
+    
+    /* Add a small indicator that the sidebar is scrollable */
+    .profile-scrollable::after {
+      content: '';
+      display: block;
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 5px;
+      background-color: var(--border-light);
+      border-radius: 5px;
+      opacity: 0.7;
+    }
+  }

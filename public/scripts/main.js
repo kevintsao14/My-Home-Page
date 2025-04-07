@@ -142,6 +142,26 @@ document.querySelectorAll('.profile-link').forEach(link => {
     });
 });
 
+// Function to scroll to an element within the scrollable sidebar area
+function scrollToSidebarElement(element) {
+    const scrollableArea = document.querySelector('.profile-scrollable');
+    if (!element || !scrollableArea) return;
+    
+    // Calculate the element's position relative to the scrollable container
+    const elementTop = element.offsetTop;
+    const containerScrollTop = scrollableArea.scrollTop;
+    const containerHeight = scrollableArea.clientHeight;
+    
+    // Only scroll if the element is not already fully visible
+    if (elementTop < containerScrollTop || elementTop > containerScrollTop + containerHeight) {
+        // Smooth scroll to the element
+        scrollableArea.scrollTo({
+            top: elementTop - 20, // 20px padding from the top
+            behavior: 'smooth'
+        });
+    }
+}
+
 // Function to unlock a section when specific keywords are detected
 function unlockSection(sectionName, displayName = null) {
     let wasUnlocked = false;
@@ -182,7 +202,16 @@ function unlockSection(sectionName, displayName = null) {
                 (toggleLink ? toggleLink.querySelector('span').textContent : sectionName));
 
         showUnlockNotification(unlockName);
+        
+        // Scroll to the newly unlocked section in the sidebar
+        if (sectionLink) {
+            scrollToSidebarElement(sectionLink);
+        } else if (toggleLink) {
+            scrollToSidebarElement(toggleLink);
+        }
     }
+    
+    return wasUnlocked;
 }
 
 // Process keywords and reveal sections
@@ -284,6 +313,22 @@ document.addEventListener('click', function (e) {
     if (contactLink && contactLink.classList.contains('unlocked')) {
         e.preventDefault();
         document.querySelector('.contact-dropdown').classList.toggle('show');
+        
+        // If the dropdown is being shown and we're on mobile, scroll to it
+        const contactDropdown = document.querySelector('.contact-dropdown');
+        if (contactDropdown.classList.contains('show') && window.innerWidth <= 768) {
+            // Wait for the dropdown to expand before scrolling
+            setTimeout(() => {
+                // Scroll to the bottom of the dropdown
+                const scrollableArea = document.querySelector('.profile-scrollable');
+                if (scrollableArea) {
+                    scrollableArea.scrollTo({
+                        top: contactLink.offsetTop + 200, // Approximate height to see content
+                        behavior: 'smooth'
+                    });
+                }
+            }, 300); // Match this to your transition time
+        }
     }
 });
 
@@ -312,4 +357,56 @@ document.addEventListener('click', function (e) {
             }, 3000);
         });
     }
+});
+
+// Sidebar toggle functionality with body scroll locking
+document.addEventListener('DOMContentLoaded', function() {
+    const sidebarToggle = document.getElementById('sidebar-toggle');
+    const sidebar = document.querySelector('.profile-sidebar');
+    const overlay = document.getElementById('sidebar-overlay');
+    
+    function toggleSidebar(show) {
+        if (show) {
+            sidebar.classList.add('open');
+            overlay.classList.add('active');
+            document.body.classList.add('sidebar-open');
+        } else {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+            document.body.classList.remove('sidebar-open');
+        }
+    }
+    
+    // Toggle sidebar when hamburger menu is clicked
+    if (sidebarToggle) {
+        sidebarToggle.addEventListener('click', function() {
+            const isOpen = sidebar.classList.contains('open');
+            toggleSidebar(!isOpen);
+        });
+    }
+    
+    // Close sidebar when overlay is clicked
+    if (overlay) {
+        overlay.addEventListener('click', function() {
+            toggleSidebar(false);
+        });
+    }
+    
+    // Close sidebar when a sidebar link is clicked (for better mobile UX)
+    const sidebarLinks = document.querySelectorAll('.profile-link');
+    sidebarLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            // Only close if we're on mobile
+            if (window.innerWidth <= 768) {
+                toggleSidebar(false);
+            }
+        });
+    });
+    
+    // Handle window resize
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768) {
+            toggleSidebar(false);
+        }
+    });
 });
