@@ -147,6 +147,16 @@
     display: none;
 }
 
+/* Make email div behave like a link on hover */
+.email-link {
+    cursor: pointer; /* Changes the cursor to a pointer (hand) like links */
+  }
+  
+  /* Make sure the copy icon has the right cursor too */
+  .copy-email {
+    cursor: pointer;
+  }
+
 /* Contact dropdown */
 .contact-dropdown {
     max-height: 0;

@@ -334,6 +334,9 @@ document.addEventListener('click', function (e) {
 
 document.addEventListener('click', function (e) {
     if (e.target.classList.contains('copy-email') || e.target.closest('.copy-email')) {
+        // Prevent the default behavior which would open mail app
+        e.preventDefault();
+
         const button = e.target.classList.contains('copy-email') ? e.target : e.target.closest('.copy-email');
         const email = button.getAttribute('data-email');
 
