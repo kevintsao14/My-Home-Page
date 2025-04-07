@@ -392,12 +392,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Close sidebar when a sidebar link is clicked (for better mobile UX)
-    const sidebarLinks = document.querySelectorAll('.profile-link');
+    // Close sidebar when certain sidebar links are clicked (except contact and other dropdown toggles)
+    const sidebarLinks = document.querySelectorAll('.profile-link:not([data-toggle])');
     sidebarLinks.forEach(link => {
         link.addEventListener('click', function() {
-            // Only close if we're on mobile
-            if (window.innerWidth <= 768) {
+            // Only close if we're on mobile and this is not a dropdown toggle link
+            if (window.innerWidth <= 768 && !this.hasAttribute('data-toggle')) {
                 toggleSidebar(false);
             }
         });
