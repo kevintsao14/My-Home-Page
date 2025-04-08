@@ -126,109 +126,16 @@
     font-size: 0.95rem;
 }
 
-/* Responsive adjustments for content sections */
-@media (max-width: 768px) {
-    .projects-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .hidden-section.reveal {
-        margin-top: 1.5rem;
-    }
-    
-    .projects-section, .hobbies-section, .contact-section {
-        padding: 1.5rem;
-    }
-}
-
-/* ===== CAREER SECTION ===== */
-.career-section {
-    background: var(--bg-white);
-    border-radius: 16px;
-    padding: 2rem;
-    box-shadow: 0 8px 32px var(--shadow-light);
-    border-left: 4px solid var(--primary);
-}
-
-.experience-timeline {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-.experience-card {
-    background-color: var(--bg-white);
-    border-radius: 10px;
-    padding: 1.5rem;
-    box-shadow: 0 4px 12px var(--shadow-light);
-    border: 1px solid var(--border-light);
-    transition: all 0.3s;
-    position: relative;
-}
-
-.experience-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 24px var(--shadow-medium);
-    border-color: var(--primary);
-}
-
-.experience-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 0.5rem;
-}
-
-.company-name {
-    font-weight: bold;
-    color: var(--primary);
-    font-size: 1.1rem;
-    margin: 0;
-}
-
-.job-period {
-    color: var(--text-muted);
-    font-size: 0.9rem;
-}
-
-.job-title {
-    color: var(--accent);
-    margin-top: 0;
-    margin-bottom: 0.8rem;
-    font-size: 1rem;
-    font-weight: 500;
-}
-
-.job-description {
-    margin-bottom: 1rem;
-    color: var(--text-dark);
-    font-size: 0.95rem;
-}
-
-.tech-stack {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-}
-
-.tech-item {
-    background-color: #f0f0f0;
-    padding: 0.3rem 0.8rem;
-    border-radius: 15px;
-    font-size: 0.8rem;
-    color: var(--primary);
-}
-
-/* ===== EDUCATION SECTION ===== */
+/* NEW SECTION: Education Section Styles */
 .education-section {
     background: var(--bg-white);
     border-radius: 16px;
     padding: 2rem;
     box-shadow: 0 8px 32px var(--shadow-light);
-    border-left: 4px solid #6c5ce7; /* Different color for education */
+    border-left: 4px solid #4285F4; /* Google blue color for education */
 }
 
-.education-container {
+.education-timeline {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
@@ -246,68 +153,103 @@
 .education-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 12px 24px var(--shadow-medium);
-    border-color: #6c5ce7; /* Match the section border */
+    border-color: #4285F4;
 }
 
-.edu-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 0.5rem;
-}
-
-.school-name {
+.education-title {
     font-weight: bold;
-    color: var(--primary);
     font-size: 1.1rem;
-    margin: 0;
+    margin-bottom: 0.5rem;
+    color: var(--primary);
 }
 
-.edu-period {
-    color: var(--text-muted);
-    font-size: 0.9rem;
-}
-
-.degree {
-    color: #6c5ce7; /* Match the section border */
-    margin-top: 0;
-    margin-bottom: 0.8rem;
-    font-size: 1rem;
+.education-dates {
+    font-size: 0.85rem;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
     font-weight: 500;
 }
 
-.edu-description {
-    margin-bottom: 1rem;
-    color: var(--text-dark);
+.education-details {
     font-size: 0.95rem;
+    margin-bottom: 0.5rem;
 }
 
-.key-courses {
+.education-courses {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+/* RENAMED SECTION: Career Section Styles (formerly Experience) */
+.career-section {
+    background: var(--bg-white);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 8px 32px var(--shadow-light);
+    border-left: 4px solid #34A853; /* Google green color for career */
+}
+
+.career-timeline {
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
-.course-item {
-    background-color: #f0f0f0;
-    padding: 0.3rem 0.8rem;
-    border-radius: 15px;
-    font-size: 0.8rem;
+.career-card {
+    background-color: var(--bg-white);
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px var(--shadow-light);
+    border: 1px solid var(--border-light);
+    transition: all 0.3s;
+}
+
+.career-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px var(--shadow-medium);
+    border-color: #34A853;
+}
+
+.career-title {
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
     color: var(--primary);
 }
 
-/* ===== BACKGROUND SECTION ===== */
+.career-position {
+    font-size: 0.95rem;
+    color: var(--accent);
+    margin-bottom: 0.25rem;
+    font-weight: 500;
+}
+
+.career-dates {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+}
+
+.career-description {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+/* RENAMED SECTION: Background Section Styles (formerly Skills) */
 .background-section {
     background: var(--bg-white);
     border-radius: 16px;
     padding: 2rem;
     box-shadow: 0 8px 32px var(--shadow-light);
-    border-left: 4px solid #00b894; /* Different color for background */
+    border-left: 4px solid #FBBC05; /* Google yellow color for background */
 }
 
-.background-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+.background-container {
+    display: flex;
+    flex-direction: column;
     gap: 1.5rem;
 }
 
@@ -318,43 +260,71 @@
     box-shadow: 0 4px 12px var(--shadow-light);
     border: 1px solid var(--border-light);
     transition: all 0.3s;
+    margin-bottom: 1.5rem;
 }
 
 .background-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 12px 24px var(--shadow-medium);
-    border-color: #00b894; /* Match the section border */
+    border-color: #FBBC05;
 }
 
 .background-title {
-    font-weight: bold;
-    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
     color: var(--primary);
+    font-weight: 600;
+    border-bottom: 1px solid var(--border-light);
+    padding-bottom: 0.5rem;
+}
+
+.background-content {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.skill-item {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    font-size: 1.1rem;
+    background-color: #f8f9fa;
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    transition: all 0.2s;
 }
 
-.background-description {
-    color: var(--text-dark);
-    font-size: 0.95rem;
-    line-height: 1.6;
+.skill-item:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-2px);
 }
 
-/* Responsive Adjustments */
+/* Responsive adjustments for content sections */
 @media (max-width: 768px) {
-    .background-content {
+    .projects-grid {
         grid-template-columns: 1fr;
     }
     
-    .experience-header, .edu-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.3rem;
+    .hidden-section.reveal {
+        margin-top: 1.5rem;
     }
     
-    .experience-card, .education-card, .background-card {
-        padding: 1.2rem;
+    .projects-section, .hobbies-section, .contact-section, 
+    .education-section, .career-section, .background-section {
+        padding: 1.5rem;
+    }
+    
+    .skills-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
     }
 }
