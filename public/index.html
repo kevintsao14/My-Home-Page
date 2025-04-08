@@ -70,25 +70,26 @@
                     </div>
                 </div> -->
 
+                <!-- Updated sidebar links with proper data-section attributes -->
                 <div class="profile-links">
                     <a href="#" class="profile-link locked" data-section="projects-section">
                         <i data-lucide="folder-git-2"></i>
                         <span>Projects</span>
                         <i data-lucide="lock" class="lock-icon"></i>
                     </a>
-                    <a href="#" class="profile-link locked">
+                    <a href="#" class="profile-link locked" data-section="career-section">
                         <i data-lucide="briefcase"></i>
-                        <span>Experience</span>
+                        <span>Career</span>
                         <i data-lucide="lock" class="lock-icon"></i>
                     </a>
-                    <a href="#" class="profile-link locked">
+                    <a href="#" class="profile-link locked" data-section="education-section">
                         <i data-lucide="graduation-cap"></i>
                         <span>Education</span>
                         <i data-lucide="lock" class="lock-icon"></i>
                     </a>
-                    <a href="#" class="profile-link locked">
+                    <a href="#" class="profile-link locked" data-section="background-section">
                         <i data-lucide="code-2"></i>
-                        <span>Skills</span>
+                        <span>Background</span>
                         <i data-lucide="lock" class="lock-icon"></i>
                     </a>
                     <a href="#" class="profile-link locked" data-section="hobbies-section">
@@ -164,8 +165,8 @@
                 <div id="response">
                     <div class="message bot-message">
                         <span class="message-label">Kevin:</span>
-                        <span class="message-content">Hello! I'm Kevin, a software developer specializing in AI
-                            applications. You can ask me about my projects, experience, or hobbies. What would you like
+                        <span class="message-content">Hello! I'm ???, a software developer specializing in AI
+                            applications. You can ask me about my projects, career, or hobbies. What would you like
                             to know?</span>
                     </div>
                 </div>
@@ -264,6 +265,145 @@
                         </h4>
                         <p class="project-description">Classically trained pianist. Currently learning jazz
                             improvisation.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Career Section -->
+            <div class="hidden-section career-section">
+                <h3 class="section-title">
+                    <i data-lucide="briefcase"></i>
+                    <span>Professional Experience</span>
+                </h3>
+                <div class="experience-timeline">
+                    <div class="experience-card">
+                        <div class="experience-header">
+                            <h4 class="company-name">TechVision AI</h4>
+                            <span class="job-period">2023 - Present</span>
+                        </div>
+                        <h5 class="job-title">Senior Software Engineer</h5>
+                        <p class="job-description">Leading the development of AI-powered chatbot services using GPT-4o
+                            and LangChain. Implemented retrieval-augmented generation systems that improved response
+                            accuracy by 37%.</p>
+                        <div class="tech-stack">
+                            <span class="tech-item">Python</span>
+                            <span class="tech-item">React</span>
+                            <span class="tech-item">Node.js</span>
+                            <span class="tech-item">LangChain</span>
+                        </div>
+                    </div>
+
+                    <div class="experience-card">
+                        <div class="experience-header">
+                            <h4 class="company-name">DataFlow Systems</h4>
+                            <span class="job-period">2021 - 2023</span>
+                        </div>
+                        <h5 class="job-title">Full Stack Developer</h5>
+                        <p class="job-description">Designed and implemented a real-time analytics dashboard that
+                            processed over 1M events per day. Reduced page load time by 65% through strategic caching
+                            and frontend optimization.</p>
+                        <div class="tech-stack">
+                            <span class="tech-item">JavaScript</span>
+                            <span class="tech-item">Express</span>
+                            <span class="tech-item">MongoDB</span>
+                            <span class="tech-item">AWS</span>
+                        </div>
+                    </div>
+
+                    <div class="experience-card">
+                        <div class="experience-header">
+                            <h4 class="company-name">InnoTech Startups</h4>
+                            <span class="job-period">2020 - 2021</span>
+                        </div>
+                        <h5 class="job-title">Frontend Developer</h5>
+                        <p class="job-description">Built responsive web applications for early-stage startups.
+                            Collaborated with UX designers to implement pixel-perfect interfaces and interactive
+                            prototypes.</p>
+                        <div class="tech-stack">
+                            <span class="tech-item">HTML/CSS</span>
+                            <span class="tech-item">React</span>
+                            <span class="tech-item">Redux</span>
+                            <span class="tech-item">TypeScript</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Education Section -->
+            <div class="hidden-section education-section">
+                <h3 class="section-title">
+                    <i data-lucide="graduation-cap"></i>
+                    <span>Education</span>
+                </h3>
+                <div class="education-container">
+                    <div class="education-card">
+                        <div class="edu-header">
+                            <h4 class="school-name">Northeastern University</h4>
+                            <span class="edu-period">2018 - 2022</span>
+                        </div>
+                        <h5 class="degree">Master of Science in Computer Science</h5>
+                        <p class="edu-description">Specialized in Artificial Intelligence and Machine Learning.
+                            Graduated with a 3.92 GPA and honors distinction.</p>
+                        <div class="key-courses">
+                            <span class="course-item">Advanced Machine Learning</span>
+                            <span class="course-item">Natural Language Processing</span>
+                            <span class="course-item">Deep Learning Applications</span>
+                            <span class="course-item">Distributed Systems</span>
+                        </div>
+                    </div>
+
+                    <div class="education-card">
+                        <div class="edu-header">
+                            <h4 class="school-name">University of California, Berkeley</h4>
+                            <span class="edu-period">2014 - 2018</span>
+                        </div>
+                        <h5 class="degree">Bachelor of Science in Computer Science</h5>
+                        <p class="edu-description">Minor in Data Science. Active member of the Coding Club and AI
+                            Research Group.</p>
+                        <div class="key-courses">
+                            <span class="course-item">Algorithms & Data Structures</span>
+                            <span class="course-item">Database Systems</span>
+                            <span class="course-item">Web Development</span>
+                            <span class="course-item">Statistical Computing</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Background Section -->
+            <div class="hidden-section background-section">
+                <h3 class="section-title">
+                    <i data-lucide="map"></i>
+                    <span>My Background</span>
+                </h3>
+                <div class="background-content">
+                    <div class="background-card">
+                        <h4 class="background-title">
+                            <i data-lucide="map-pin"></i>
+                            Origins & Location
+                        </h4>
+                        <p class="background-description">Born and raised in San Francisco, California. Currently based
+                            in Boston, where I've lived for the past 5 years. I love the blend of history and innovation
+                            this city offers!</p>
+                    </div>
+
+                    <div class="background-card">
+                        <h4 class="background-title">
+                            <i data-lucide="languages"></i>
+                            Languages
+                        </h4>
+                        <p class="background-description">Fluent in English and Mandarin Chinese. Conversational in
+                            Spanish. Currently learning Japanese through an evening course.</p>
+                    </div>
+
+                    <div class="background-card">
+                        <h4 class="background-title">
+                            <i data-lucide="heart"></i>
+                            Values & Motivation
+                        </h4>
+                        <p class="background-description">Passionate about using technology to solve real-world
+                            problems. I believe in building accessible products that enhance human potential rather than
+                            replace it. My goal is to develop AI systems that augment human creativity and
+                            decision-making.</p>
                     </div>
                 </div>
             </div>

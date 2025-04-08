@@ -1,6 +1,9 @@
 // Initialize Lucide icons
 lucide.createIcons();
 
+// Global state to track if name has been revealed
+let nameRevealed = false;
+
 // Fill input with starter prompt
 function fillInput(text) {
     const input = document.getElementById('message-input');
@@ -21,6 +24,25 @@ document.getElementById('chat-form').addEventListener('submit', async (e) => {
 
     // Create the user's message element
     addMessage(userMessage, 'user');
+
+    // Check if message is asking about name
+    const lowerMessage = userMessage.toLowerCase();
+    if (!nameRevealed && (
+        lowerMessage.includes("what is your name") || 
+        lowerMessage.includes("who are you") ||
+        lowerMessage.includes("your name") ||
+        lowerMessage.includes("what's your name") ||
+        lowerMessage.includes("whats your name")
+    )) {
+        nameRevealed = true;
+        
+        // Update name in sidebar and hero section
+        document.querySelector('.profile-name').textContent = "Kevin Tsao";
+        document.querySelector('.name-glow').textContent = "Kevin";
+        
+        // Show notification that name was revealed
+        showUnlockNotification('My real name!');
+    }
 
     // Process keywords to reveal sections
     processKeywords(userMessage);
@@ -102,6 +124,7 @@ function addMessage(text, sender) {
     messageDiv.appendChild(contentSpan);
 
     responseDiv.appendChild(messageDiv);
+    // FIX: Use responseDiv not responseEl
     responseDiv.scrollTop = responseDiv.scrollHeight;
 }
 
@@ -162,34 +185,58 @@ function scrollToSidebarElement(element) {
     }
 }
 
-// Function to unlock a section when specific keywords are detected
+// Updated unlockSection function with improved handling for all section types
 function unlockSection(sectionName, displayName = null) {
+    console.log(`Attempting to unlock section: ${sectionName}`);
     let wasUnlocked = false;
 
     // Handle section reveals (in main content)
     const sectionLink = document.querySelector(`.profile-link[data-section="${sectionName}"]`);
-    if (sectionLink && sectionLink.classList.contains('locked')) {
-        sectionLink.classList.remove('locked');
-        sectionLink.classList.add('unlocked');
+    if (sectionLink) {
+        console.log(`Found section link for ${sectionName}`);
+        if (sectionLink.classList.contains('locked')) {
+            console.log(`Unlocking section link for ${sectionName}`);
+            sectionLink.classList.remove('locked');
+            sectionLink.classList.add('unlocked');
+            wasUnlocked = true;
+        }
 
-        // Show the corresponding section
-        document.querySelector('.' + sectionName).classList.add('reveal');
-        wasUnlocked = true;
+        // Always ensure the section is revealed, even if the link was already unlocked
+        const section = document.querySelector('.' + sectionName);
+        if (section) {
+            console.log(`Revealing section ${sectionName}`);
+            section.classList.add('reveal');
+        } else {
+            console.log(`Could not find section element with class ${sectionName}`);
+        }
+    } else {
+        console.log(`Could not find section link for ${sectionName}`);
     }
 
     // Handle dropdown toggles
     const toggleLink = document.querySelector(`.profile-link[data-toggle="${sectionName}"]`);
-    if (toggleLink && toggleLink.classList.contains('locked')) {
-        toggleLink.classList.remove('locked');
-        toggleLink.classList.add('unlocked');
+    if (toggleLink) {
+        console.log(`Found toggle link for ${sectionName}`);
+        if (toggleLink.classList.contains('locked')) {
+            console.log(`Unlocking toggle link for ${sectionName}`);
+            toggleLink.classList.remove('locked');
+            toggleLink.classList.add('unlocked');
+            wasUnlocked = true;
+        }
 
-        // Show the dropdown
-        document.querySelector('.' + sectionName).classList.add('show');
-        wasUnlocked = true;
+        // Always ensure the dropdown is shown, even if the link was already unlocked
+        const dropdown = document.querySelector('.' + sectionName);
+        if (dropdown) {
+            console.log(`Showing dropdown ${sectionName}`);
+            dropdown.classList.add('show');
+        } else {
+            console.log(`Could not find dropdown with class ${sectionName}`);
+        }
     }
 
     // Handle profile picture reveal
     if (sectionName === 'profile-pic' && !document.getElementById('profile-pic').classList.contains('reveal')) {
+        console.log('Revealing profile picture');
         document.getElementById('profile-pic').classList.add('reveal');
         wasUnlocked = true;
     }
@@ -201,6 +248,7 @@ function unlockSection(sectionName, displayName = null) {
             (sectionLink ? sectionLink.querySelector('span').textContent :
                 (toggleLink ? toggleLink.querySelector('span').textContent : sectionName));
 
+        console.log(`Showing unlock notification for ${unlockName}`);
         showUnlockNotification(unlockName);
         
         // Scroll to the newly unlocked section in the sidebar
@@ -209,13 +257,13 @@ function unlockSection(sectionName, displayName = null) {
         } else if (toggleLink) {
             scrollToSidebarElement(toggleLink);
         }
+    } else {
+        console.log(`No unlock was needed for ${sectionName}`);
     }
     
     return wasUnlocked;
 }
-
-// Process keywords and reveal sections
-// Enhanced processKeywords function
+// Updated process keywords function to properly reveal sections
 function processKeywords(message) {
     const lowerMsg = message.toLowerCase();
 
@@ -230,41 +278,55 @@ function processKeywords(message) {
     }
 
     // Project keywords
-    if (lowerMsg.includes('project') || lowerMsg.includes('work') || lowerMsg.includes('portfolio')) {
+    if (lowerMsg.includes('project') || lowerMsg.includes('portfolio') || 
+        lowerMsg.includes('work') || lowerMsg.includes('app')) {
+        console.log("Project keywords detected");
         document.querySelector('.projects-section').classList.add('reveal');
-        unlockSection('projects-section');
+        unlockSection('projects-section', 'Projects');
     }
 
     // Hobby keywords
     if (lowerMsg.includes('hobby') || lowerMsg.includes('hobbies') || lowerMsg.includes('interest') ||
-        lowerMsg.includes('free time') || lowerMsg.includes('fun')) {
+        lowerMsg.includes('free time') || lowerMsg.includes('fun') || lowerMsg.includes('passion')) {
+        console.log("Hobby keywords detected");
         document.querySelector('.hobbies-section').classList.add('reveal');
-        unlockSection('hobbies-section');
+        unlockSection('hobbies-section', 'Hobbies');
     }
 
     // Educational background keywords
     if (lowerMsg.includes('education') || lowerMsg.includes('school') || lowerMsg.includes('university') ||
-        lowerMsg.includes('degree') || lowerMsg.includes('study')) {
-        unlockSection('education-section');
+        lowerMsg.includes('degree') || lowerMsg.includes('study') || lowerMsg.includes('college') ||
+        lowerMsg.includes('academic') || lowerMsg.includes('graduate')) {
+        console.log("Education keywords detected");
+        document.querySelector('.education-section').classList.add('reveal');
+        unlockSection('education-section', 'Education');
     }
 
-    // Experience keywords
-    if (lowerMsg.includes('experience') || lowerMsg.includes('work history') || lowerMsg.includes('job') ||
-        lowerMsg.includes('career') || lowerMsg.includes('employment')) {
-        unlockSection('experience-section');
+    // Background keywords
+    if (lowerMsg.includes('born') || lowerMsg.includes('live') || lowerMsg.includes('location') ||
+        lowerMsg.includes('childhood') || lowerMsg.includes('background') || lowerMsg.includes('from') ||
+        lowerMsg.includes('origin') || lowerMsg.includes('hometown') || lowerMsg.includes('cultural') ||
+        lowerMsg.includes('language') || lowerMsg.includes('values')) {
+        console.log("Background keywords detected");
+        document.querySelector('.background-section').classList.add('reveal');
+        unlockSection('background-section', 'Background');
     }
 
-    // Skills keywords
-    if (lowerMsg.includes('skill') || lowerMsg.includes('programming') || lowerMsg.includes('technology') ||
-        lowerMsg.includes('language') || lowerMsg.includes('framework')) {
-        unlockSection('skills-section');
+    // Career keywords
+    if (lowerMsg.includes('career') || lowerMsg.includes('job') || lowerMsg.includes('employment') ||
+        lowerMsg.includes('profession') || lowerMsg.includes('company') || lowerMsg.includes('role') ||
+        lowerMsg.includes('technology') || lowerMsg.includes('working') || lowerMsg.includes('intern') ||
+        lowerMsg.includes('experience') || lowerMsg.includes('professional')) {
+        console.log("Career keywords detected");
+        document.querySelector('.career-section').classList.add('reveal');
+        unlockSection('career-section', 'Career');
     }
 
     // Contact keywords
     if (lowerMsg.includes('contact') || lowerMsg.includes('email') || lowerMsg.includes('reach out') ||
         lowerMsg.includes('connect') || lowerMsg.includes('message') || lowerMsg.includes('social media') ||
         lowerMsg.includes('instagram') || lowerMsg.includes('linkedin') || lowerMsg.includes('github')) {
-        unlockSection('contact-dropdown');
+        unlockSection('contact-dropdown', 'Contact Info');
     }
 
     // Easter egg
@@ -272,7 +334,6 @@ function processKeywords(message) {
         triggerConfetti();
     }
 }
-
 
 // Easter egg: Trigger confetti
 function triggerConfetti() {
@@ -412,4 +473,8 @@ document.addEventListener('DOMContentLoaded', function() {
             toggleSidebar(false);
         }
     });
+
+    // Initialize the UI with question marks instead of real name
+    document.querySelector('.profile-name').textContent = "??? ????";
+    document.querySelector('.name-glow').textContent = "????";
 });

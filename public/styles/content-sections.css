@@ -140,3 +140,221 @@
         padding: 1.5rem;
     }
 }
+
+/* ===== CAREER SECTION ===== */
+.career-section {
+    background: var(--bg-white);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 8px 32px var(--shadow-light);
+    border-left: 4px solid var(--primary);
+}
+
+.experience-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.experience-card {
+    background-color: var(--bg-white);
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px var(--shadow-light);
+    border: 1px solid var(--border-light);
+    transition: all 0.3s;
+    position: relative;
+}
+
+.experience-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px var(--shadow-medium);
+    border-color: var(--primary);
+}
+
+.experience-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.company-name {
+    font-weight: bold;
+    color: var(--primary);
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+.job-period {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.job-title {
+    color: var(--accent);
+    margin-top: 0;
+    margin-bottom: 0.8rem;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.job-description {
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+    font-size: 0.95rem;
+}
+
+.tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tech-item {
+    background-color: #f0f0f0;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    color: var(--primary);
+}
+
+/* ===== EDUCATION SECTION ===== */
+.education-section {
+    background: var(--bg-white);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 8px 32px var(--shadow-light);
+    border-left: 4px solid #6c5ce7; /* Different color for education */
+}
+
+.education-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.education-card {
+    background-color: var(--bg-white);
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px var(--shadow-light);
+    border: 1px solid var(--border-light);
+    transition: all 0.3s;
+}
+
+.education-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px var(--shadow-medium);
+    border-color: #6c5ce7; /* Match the section border */
+}
+
+.edu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.school-name {
+    font-weight: bold;
+    color: var(--primary);
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+.edu-period {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.degree {
+    color: #6c5ce7; /* Match the section border */
+    margin-top: 0;
+    margin-bottom: 0.8rem;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.edu-description {
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+    font-size: 0.95rem;
+}
+
+.key-courses {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.course-item {
+    background-color: #f0f0f0;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    color: var(--primary);
+}
+
+/* ===== BACKGROUND SECTION ===== */
+.background-section {
+    background: var(--bg-white);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 8px 32px var(--shadow-light);
+    border-left: 4px solid #00b894; /* Different color for background */
+}
+
+.background-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.background-card {
+    background-color: var(--bg-white);
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px var(--shadow-light);
+    border: 1px solid var(--border-light);
+    transition: all 0.3s;
+}
+
+.background-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px var(--shadow-medium);
+    border-color: #00b894; /* Match the section border */
+}
+
+.background-title {
+    font-weight: bold;
+    margin-bottom: 0.8rem;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.background-description {
+    color: var(--text-dark);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .background-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .experience-header, .edu-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.3rem;
+    }
+    
+    .experience-card, .education-card, .background-card {
+        padding: 1.2rem;
+    }
+}
